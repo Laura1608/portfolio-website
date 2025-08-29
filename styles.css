@@ -542,58 +542,41 @@ p {
 }
 
 /* Skills Section */
-.skills-grid-2x2 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-2xl);
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.skills-category h3 {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: var(--spacing-lg);
+.skills {
     text-align: center;
-    font-size: var(--font-size-xl);
 }
 
 .skills-grid {
     display: grid;
-    gap: var(--spacing-md);
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-2xl);
+    max-width: 1200px;
+    margin: var(--spacing-2xl) auto;
 }
 
-.skill-item {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: var(--spacing-lg);
-    align-items: center;
-}
-
-.skill-name {
-    font-weight: 600;
-    color: var(--text-primary);
-    font-size: var(--font-size-sm);
-}
-
-.skill-bar {
-    height: 8px;
-    background: var(--bg-secondary);
+.skill-card {
+    background-color: var(--bg-secondary);
+    padding: var(--spacing-xl);
     border-radius: var(--radius-lg);
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    min-width: 150px;
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.skill-progress {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-    border-radius: var(--radius-lg);
-    transition: width 1.5s ease;
-    width: 0%;
+.skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.skill-card i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+}
+
+.skill-card h4 {
+    margin-bottom: var(--spacing-sm);
 }
 
 /* Client Reviews Section */
@@ -983,19 +966,9 @@ p {
         gap: var(--spacing-2xl);
     }
 
-    .skills-grid-2x2 {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-xl);
-        max-width: 500px;
-    }
-    
-    .skill-item {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-md);
-    }
-    
-    .skill-bar {
-        width: 100%;
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: var(--spacing-lg);
     }
 
     .hero-cta {
