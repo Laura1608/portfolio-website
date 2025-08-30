@@ -16,7 +16,7 @@
     --text-light: #9ca3af;
     --bg-primary: #ffffff;
     --bg-secondary: #f8fafc;
-    --bg-dark: #1e1b4b;
+    --bg-dark: #291b4b;
     --border-color: #e5e7eb;
     --shadow-sm: 0 1px 2px 0 rgba(124, 58, 237, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(124, 58, 237, 0.1);
@@ -121,7 +121,6 @@ p {
     margin-bottom: var(--spacing-lg);
     position: relative;
     font-size: 2rem;
-    color: var(--primary-color);
 }
 
 .section-title::after {
@@ -406,7 +405,7 @@ p {
     display: block;
     font-size: var(--font-size-3xl);
     font-weight: 700;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -510,7 +509,7 @@ p {
 }
 
 .project-card-back {
-    background-color: var(--bg-secondary);
+    background: linear-gradient(135deg, #6573b17b 0%, #8e6bb162 100%);
     opacity: 0;
     text-align: left;
     overflow-y: auto;
@@ -610,7 +609,6 @@ p {
 }
 
 .btn-project-back:hover {
-    background: var(--primary-dark);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
@@ -812,11 +810,11 @@ p {
 .stars {
     display: flex;
     gap: 4px;
-    margin-bottom: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
 }
 
 .stars i {
-    color: white;
+    color: var(--primary-color);
     font-size: var(--font-size-lg);
 }
 
@@ -840,7 +838,7 @@ p {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-2xl);
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
@@ -930,7 +928,7 @@ p {
 
 /* Footer */
 .footer {
-    background: #1e1b4b;
+    background: linear-gradient(135deg, #4157b87b 0%, #6b31a48e 100%);
     color: white;
     padding: var(--spacing-3xl) 0 var(--spacing-lg);
 }
