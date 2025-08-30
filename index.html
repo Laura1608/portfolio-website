@@ -101,7 +101,7 @@
             
             <div class="projects-grid">
                 <!-- Featured Project -->
-                <div class="project-card featured">
+                <div class="project-card featured" data-project="marketsignal">
                     <div class="project-card-inner">
                         <div class="project-card-front">
                             <img src="https://via.placeholder.com/400x300.png?text=MarketSignal" alt="MarketSignal" class="project-img">
@@ -119,22 +119,40 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="project-card-back">
-                            <div class="project-story">
-                                <h5>The Story Behind MarketSignal</h5>
-                                <p>As a digital nomad constantly exploring new markets and opportunities, I noticed how valuable Reddit discussions were for understanding user needs and market trends. However, manually analyzing thousands of posts was time-consuming and inefficient. This led me to build MarketSignal - an AI-powered tool that automatically processes Reddit discussions to extract actionable insights about user pain points, emerging opportunities, and competitive intelligence.</p>
-                                <p>The project combines web scraping, natural language processing, and behavioral science principles to identify patterns that human analysts might miss. It's been used by entrepreneurs, product managers, and market researchers to make data-driven decisions about product development and market entry strategies.</p>
-                            </div>
-                            <div class="project-actions">
-                                <a href="https://www.market-signal.com/" class="btn btn-project-back" target="_blank"><i class="fas fa-external-link-alt"></i> Website</a>
-                                <a href="https://github.com/laura1608" class="btn btn-project-back" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                            </div>
+                    </div>
+                </div>
+                <div id="popup-marketsignal" class="project-popup">
+                    <div class="project-popup-content">
+                        <button class="project-popup-close">&times;</button>
+                        <div class="project-story">
+                            <h5>The Challenge</h5>
+                            <p>Startups and businesses need to identify market opportunities quickly but lack efficient tools to analyze large volumes of social media data and user discussions.</p>
+                            <h5>My Solution</h5>
+                            <ul>
+                                <li>Built automated web scraping tools for competitor analysis</li>
+                                <li>Developed data processing pipelines for market intelligence</li>
+                                <li>Created sentiment analysis algorithms for social media monitoring</li>
+                            </ul>
+                            <h5>The Results</h5>
+                            <ul>
+                                <li>Reduced research time by 90% through automation</li>
+                                <li>Identified 3x more market opportunities than manual methods</li>
+                                <li>Improved decision-making accuracy by 40%</li>
+                            </ul>
+
+                            <h5>The Story Behind MarketSignal</h5>
+                            <p>As a digital nomad constantly exploring new markets and opportunities, I noticed how valuable Reddit discussions were for understanding user needs and market trends. However, manually analyzing thousands of posts was time-consuming and inefficient. This led me to build MarketSignal - an AI-powered tool that automatically processes Reddit discussions to extract actionable insights about user pain points, emerging opportunities, and competitive intelligence.</p>
+                            <p>The project combines web scraping, natural language processing, and behavioral science principles to identify patterns that human analysts might miss. It's been used by entrepreneurs, product managers, and market researchers to make data-driven decisions about product development and market entry strategies.</p>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://www.market-signal.com/" class="btn btn-project-back" target="_blank"><i class="fas fa-external-link-alt"></i> Website</a>
+                            <a href="https://github.com/laura1608" class="btn btn-project-back" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Other Projects -->
-                <div class="project-card">
+                <div class="project-card" data-project="cro-optimization">
                     <div class="project-card-inner">
                         <div class="project-card-front">
                             <img src="https://via.placeholder.com/400x300.png?text=CRO+Optimization" alt="CRO Optimization" class="project-img">
@@ -150,32 +168,35 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="project-card-back">
-                            <div class="project-story">
-                                <h5>The Challenge</h5>
-                                <p>Many businesses struggle with low conversion rates and lack systematic approaches to optimize their websites for better user engagement and sales.</p>
-                                <h5>My Solution</h5>
-                                <ul>
-                                    <li>Developed automated A/B testing frameworks using Python</li>
-                                    <li>Created user behavior analysis tools with heatmap generation</li>
-                                    <li>Built conversion funnel optimization algorithms</li>
-                                </ul>
-                                <h5>The Results</h5>
-                                <ul>
-                                    <li>Increased conversion rates by 25-40% for client websites</li>
-                                    <li>Reduced manual testing time by 80% through automation</li>
-                                    <li>Improved user experience scores by 35%</li>
-                                </ul>
-                            </div>
-                            <div class="project-actions">
-                                <a href="https://github.com/laura1608" class="btn btn-project-back" target="_blank"><i class="fas fa-external-link-alt"></i> View Case Study</a>
-                                <a href="https://github.com/laura1608" class="btn btn-project-back" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                            </div>
+                    </div>
+                </div>
+                <div id="popup-cro-optimization" class="project-popup">
+                    <div class="project-popup-content">
+                        <button class="project-popup-close">&times;</button>
+                        <div class="project-story">
+                            <h5>The Challenge</h5>
+                            <p>Many businesses struggle with low conversion rates and lack systematic approaches to optimize their websites for better user engagement and sales.</p>
+                            <h5>My Solution</h5>
+                            <ul>
+                                <li>Developed automated A/B testing frameworks using Python</li>
+                                <li>Created user behavior analysis tools with heatmap generation</li>
+                                <li>Built conversion funnel optimization algorithms</li>
+                            </ul>
+                            <h5>The Results</h5>
+                            <ul>
+                                <li>Increased conversion rates by 25-40% for client websites</li>
+                                <li>Reduced manual testing time by 80% through automation</li>
+                                <li>Improved user experience scores by 35%</li>
+                            </ul>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/laura1608" class="btn btn-project-back" target="_blank"><i class="fas fa-external-link-alt"></i> View Case Study</a>
+                            <a href="https://github.com/laura1608" class="btn btn-project-back" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="project-card">
+                
+                <div class="project-card" data-project="market-research">
                     <div class="project-card-inner">
                         <div class="project-card-front">
                             <img src="https://via.placeholder.com/400x300.png?text=Market+Research" alt="Market Research Automation" class="project-img">
@@ -191,32 +212,35 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="project-card-back">
-                            <div class="project-story">
-                                <h5>The Challenge</h5>
-                                <p>Manual market research is time-consuming and often misses key insights due to human limitations in processing large datasets.</p>
-                                <h5>My Solution</h5>
-                                <ul>
-                                    <li>Built automated web scraping tools for competitor analysis</li>
-                                    <li>Developed data processing pipelines for market intelligence</li>
-                                    <li>Created sentiment analysis algorithms for social media monitoring</li>
-                                </ul>
-                                <h5>The Results</h5>
-                                <ul>
-                                    <li>Reduced research time by 90% through automation</li>
-                                    <li>Identified 3x more market opportunities than manual methods</li>
-                                    <li>Improved decision-making accuracy by 40%</li>
-                                </ul>
-                            </div>
-                            <div class="project-actions">
-                                <a href="https://github.com/laura1608" class="btn btn-project-back" target="_blank"><i class="fas fa-external-link-alt"></i> View Case Study</a>
-                                <a href="https://github.com/laura1608" class="btn btn-project-back" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                            </div>
+                    </div>
+                </div>
+                <div id="popup-market-research" class="project-popup">
+                    <div class="project-popup-content">
+                        <button class="project-popup-close">&times;</button>
+                        <div class="project-story">
+                            <h5>The Challenge</h5>
+                            <p>Manual market research is time-consuming and often misses key insights due to human limitations in processing large datasets.</p>
+                            <h5>My Solution</h5>
+                            <ul>
+                                <li>Built automated web scraping tools for competitor analysis</li>
+                                <li>Developed data processing pipelines for market intelligence</li>
+                                <li>Created sentiment analysis algorithms for social media monitoring</li>
+                            </ul>
+                            <h5>The Results</h5>
+                            <ul>
+                                <li>Reduced research time by 90% through automation</li>
+                                <li>Identified 3x more market opportunities than manual methods</li>
+                                <li>Improved decision-making accuracy by 40%</li>
+                            </ul>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/laura1608" class="btn btn-project-back" target="_blank"><i class="fas fa-external-link-alt"></i> View Case Study</a>
+                            <a href="https://github.com/laura1608" class="btn btn-project-back" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="project-card">
+                
+                <div class="project-card" data-project="process">
                     <div class="project-card-inner">
                         <div class="project-card-front">
                             <img src="https://via.placeholder.com/400x300.png?text=Process+Optimization" alt="Process Optimization Dashboard" class="project-img">
@@ -232,27 +256,30 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="project-card-back">
-                            <div class="project-story">
-                                <h5>The Challenge</h5>
-                                <p>Businesses often struggle to identify inefficiencies in their processes and lack visual tools to track improvement metrics.</p>
-                                <h5>My Solution</h5>
-                                <ul>
-                                    <li>Designed interactive PowerBI dashboards for process monitoring</li>
-                                    <li>Implemented Lean Six Sigma methodologies for process improvement</li>
-                                    <li>Created automated reporting systems for KPI tracking</li>
-                                </ul>
-                                <h5>The Results</h5>
-                                <ul>
-                                    <li>Reduced process cycle times by 30-50%</li>
-                                    <li>Improved operational efficiency by 40%</li>
-                                    <li>Saved $200K+ annually through process optimization</li>
-                                </ul>
-                            </div>
-                            <div class="project-actions">
-                                <a href="https://github.com/laura1608" class="btn btn-project-back" target="_blank"><i class="fas fa-external-link-alt"></i> View Case Study</a>
-                                <a href="https://github.com/laura1608" class="btn btn-project-back" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                            </div>
+                    </div>
+                </div>
+                <div id="popup-process" class="project-popup">
+                    <div class="project-popup-content">
+                        <button class="project-popup-close">&times;</button>
+                        <div class="project-story">
+                            <h5>The Challenge</h5>
+                            <p>Businesses often struggle to identify inefficiencies in their processes and lack visual tools to track improvement metrics.</p>
+                            <h5>My Solution</h5>
+                            <ul>
+                                <li>Designed interactive PowerBI dashboards for process monitoring</li>
+                                <li>Implemented Lean Six Sigma methodologies for process improvement</li>
+                                <li>Created automated reporting systems for KPI tracking</li>
+                            </ul>
+                            <h5>The Results</h5>
+                            <ul>
+                                <li>Reduced process cycle times by 30-50%</li>
+                                <li>Improved operational efficiency by 40%</li>
+                                <li>Saved $200K+ annually through process optimization</li>
+                            </ul>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/laura1608" class="btn btn-project-back" target="_blank"><i class="fas fa-external-link-alt"></i> View Case Study</a>
+                            <a href="https://github.com/laura1608" class="btn btn-project-back" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
