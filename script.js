@@ -65,7 +65,6 @@ const statsObserver = new IntersectionObserver((entries) => {
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initReviewsSlideshow();
-    initProjectModals();
     
     // Initialize stats observer
     const aboutSection = document.querySelector('#about');
@@ -192,41 +191,6 @@ function initReviewsSlideshow() {
     // Initial setup
     updateSlideshow();
     startAutoAdvance();
-}
-
-// Project Popup Functionality
-function initProjectModals() {
-    // Add click event listeners to project cards
-    const projectCards = document.querySelectorAll('.project-card[data-project]');
-    projectCards.forEach(card => {
-        card.addEventListener('click', () => {
-            const projectId = card.getAttribute('data-project');
-            const popup = document.getElementById(`popup-${projectId}`);
-            if (popup) {
-                popup.classList.add('active');
-            }
-        });
-    });
-
-    // Close popup when clicking outside or on close button
-    const popups = document.querySelectorAll('.project-popup');
-    popups.forEach(popup => {
-        popup.addEventListener('click', (e) => {
-            if (e.target === popup || e.target.closest('.project-popup-close')) {
-                popup.classList.remove('active');
-            }
-        });
-    });
-
-    // Close popup with Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            const activePopup = document.querySelector('.project-popup.active');
-            if (activePopup) {
-                activePopup.classList.remove('active');
-            }
-        }
-    });
 }
 
 console.log('Portfolio website loaded successfully! 🚀');
