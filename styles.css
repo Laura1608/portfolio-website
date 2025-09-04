@@ -105,7 +105,7 @@ p {
     text-align: center;
     margin-bottom: var(--spacing-lg);
     position: relative;
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
 .section-title::after {
@@ -122,7 +122,7 @@ p {
 
 .section-subtitle {
     text-align: center;
-    font-size: 1.125rem;
+    font-size: 1.3rem;
     color: var(--text-secondary);
     margin-bottom: var(--spacing-2xl);
     max-width: 800px;
@@ -232,14 +232,29 @@ p {
 }
 
 .hero-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 700;
     margin-bottom: var(--spacing-lg);
     line-height: 1.1;
-    background: linear-gradient(90deg, #7c3aed, #f59e0b);
+    background: linear-gradient(90deg, #f59e0b 0%, #ea5a0ca5 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    max-width: 80%;
+    opacity: 0;
+    animation: fadeInUp 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .hero-subtitle {
@@ -425,7 +440,7 @@ p {
 .image-placeholder img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 50%;
 }
 
@@ -501,7 +516,7 @@ p {
 .project-img {
     width: 100%;
     height: 150px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: var(--radius-md);
     margin-bottom: var(--spacing-md);
 }
@@ -547,9 +562,22 @@ p {
 
 .project-card.featured {
     grid-column: 1 / -1;
+}
+
+.project-card.featured .project-card-front {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-2xl);
+    align-items: start;
+    padding: var(--spacing-2xl);
+}
+
+.project-card.featured .project-img {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
 }
 
 .project-card.featured:hover {
@@ -749,9 +777,11 @@ p {
 }
 
 /* Contact Section */
-.contact {
+.contact p {
+    font-size: 1.1rem;
     text-align: center;
 }
+
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -931,8 +961,9 @@ p {
         grid-template-columns: 1fr;
     }
 
-    .project-card.featured {
+    .project-card.featured .project-card-front {
         grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
     }
 
     .skills-grid {
