@@ -922,21 +922,18 @@ p[text-align="center"] {
     color: rgba(255, 255, 255, 0.7);
 }
 
-/* Toast Notification */
-.toast {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+/* Form Message */
+.form-message {
     background: var(--bg-dark);
     color: white;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
+    margin-top: var(--spacing-md);
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-lg);
-    animation: slideIn 0.3s ease-out;
-    z-index: 1000;
+    text-align: center;
+    width: 100%;
 }
 
-@keyframes slideIn {
+@keyframes formMessage {
     from { transform: translateX(100%); }
     to { transform: translateX(0); }
 }
