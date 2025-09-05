@@ -922,46 +922,23 @@ p[text-align="center"] {
     color: rgba(255, 255, 255, 0.7);
 }
 
-/* Custom Alert Box */
-.custom-alert {
+/* Toast Notification */
+.toast {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    bottom: 20px;
+    right: 20px;
     background: var(--bg-dark);
     color: white;
-    padding: var(--spacing-xl);
-    border-radius: var(--radius-lg);
-    text-align: center;
-    z-index: 1000;
-    box-shadow: var(--shadow-xl);
-    min-width: 300px;
-    max-width: 90%;
-}
-
-.custom-alert .website {
-    color: var(--text-secondary);
-    margin-bottom: var(--spacing-md);
-    font-size: var(--font-size-sm);
-}
-
-.custom-alert .message {
-    margin-bottom: var(--spacing-lg);
-}
-
-.custom-alert .btn-ok {
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    padding: var(--spacing-sm) var(--spacing-xl);
+    padding: var(--spacing-lg);
     border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: var(--transition-normal);
+    box-shadow: var(--shadow-lg);
+    animation: slideIn 0.3s ease-out;
+    z-index: 1000;
 }
 
-.custom-alert .btn-ok:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
 }
 
 /* Responsive Design */
