@@ -2,16 +2,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.contact-form');
     const submitButton = form.querySelector('button[type="submit"]');
     let currentMessage = null;
-    let submitTimeout = null;
 
-    function showMessage(message) {
+    function showMessage(message, isError = false) {
         // Remove any existing message
         if (currentMessage) {
             currentMessage.remove();
         }
 
         const messageDiv = document.createElement('div');
-        messageDiv.className = 'form-message';
+        messageDiv.className = `form-message ${isError ? 'error' : 'success'}`;
         messageDiv.textContent = message;
         
         // Insert message at the end of the form
@@ -19,41 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
         currentMessage = messageDiv;
     }
 
-    // Simple form submission to formsubmit.co service
-    form.setAttribute('action', 'https://formsubmit.co/lauraottosolutions@gmail.com');
-    form.setAttribute('method', 'POST');
-
-    // Add hidden fields for formsubmit.co configuration
-    const hiddenFields = {
-        '_subject': 'Contact message Portfolio Website',
-        '_template': 'box',
-        '_captcha': 'false',
-        '_autoresponse': 'Thank you for your message! I\'ll get back to you soon.',
-        '_next': window.location.href + '?message=success'
-    };
-
-    Object.entries(hiddenFields).forEach(([key, value]) => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = value;
-        form.appendChild(input);
-    });
-
-    // Check for success message in URL
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('message') === 'success') {
-        showMessage('Thank you for your message! I\'ll get back to you soon.');
-        // Remove the success parameter from URL
-        window.history.replaceState({}, '', window.location.pathname);
-    }
-
     // Handle form submission
-    form.addEventListener('submit', function(e) {
-        // Clear any existing timeout
-        if (submitTimeout) {
-            clearTimeout(submitTimeout);
-        }
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
 
         const formData = {
             name: form.querySelector('input[name="name"]').value,
@@ -62,27 +29,41 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         if (!formData.name || !formData.email || !formData.message) {
-            e.preventDefault();
-            showMessage('Please fill in all fields');
+            showMessage('Please fill in all fields', true);
             return;
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(formData.email)) {
-            e.preventDefault();
-            showMessage('Please enter a valid email address');
+            showMessage('Please enter a valid email address', true);
             return;
         }
 
         submitButton.disabled = true;
         submitButton.textContent = 'Sending...';
 
-        // Set timeout to show error if submission takes too long
-        submitTimeout = setTimeout(() => {
-            e.preventDefault();
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                form.reset();
+                showMessage('Thank you for your message! I\'ll get back to you soon.');
+            } else {
+                throw new Error(result.error || 'Failed to send message');
+            }
+        } catch (error) {
+            showMessage(`Something went wrong. Please email me directly at lauraottosolutions@gmail.com (${error.message})`, true);
+        } finally {
             submitButton.disabled = false;
             submitButton.textContent = 'Send Message';
-            showMessage('Something went wrong. Please email me directly at lauraottosolutions@gmail.com');
-        }, 10000); // Show error after 10 seconds
+        }
     });
 });
