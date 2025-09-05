@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Email === 'undefined') {
+        console.error('SMTP.js not loaded properly');
+        return;
+    }
+
     const form = document.querySelector('.contact-form');
     const submitButton = form.querySelector('button[type="submit"]');
     let currentMessage = null;
@@ -32,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
             message: form.querySelector('textarea[name="message"]').value
         };
 
-        // Basic validation
         if (!formData.name || !formData.email || !formData.message) {
             showMessage('Please fill in all fields');
             submitButton.disabled = false;
@@ -60,8 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 ReplyTo: formData.email,
                 Subject: `Contact message Portfolio Website`,
                 Body: `
-                    <h3>Contact Form Message</h3>
-                    <p><strong>From:</strong> ${formData.name} (${formData.email})</p>
+                    <h3>New Contact Form Submission</h3>
+                    <p><strong>Name:</strong> ${formData.name}</p>
+                    <p><strong>Email:</strong> ${formData.email}</p>
                     <p><strong>Message:</strong><br>${formData.message}</p>
                 `
             });
@@ -70,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 form.reset();
                 showMessage('Message sent successfully');
             } else {
-                throw new Error(response);
+                throw new Error(response || 'Unknown error');
             }
         } catch (err) {
             showMessage('Something went wrong. Please email me directly at lauraottosolutions@gmail.com');
