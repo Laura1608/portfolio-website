@@ -935,11 +935,6 @@ p[text-align="center"] {
     font-size: var(--font-size-base);
 }
 
-@keyframes formMessage {
-    from { transform: translateX(100%); }
-    to { transform: translateX(0); }
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-menu {

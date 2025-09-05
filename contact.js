@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
         messageDiv.className = 'form-message';
         messageDiv.textContent = message;
         
-        // Insert message right after the submit button
-        submitButton.parentNode.insertBefore(messageDiv, submitButton.nextSibling);
+        // Insert message at the end of the form
+        form.appendChild(messageDiv);
         currentMessage = messageDiv;
     }
 

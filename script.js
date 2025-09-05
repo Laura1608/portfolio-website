@@ -62,17 +62,6 @@ const statsObserver = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.5 });
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    initReviewsSlideshow();
-    
-    // Initialize stats observer
-    const aboutSection = document.querySelector('#about');
-    if (aboutSection) {
-        statsObserver.observe(aboutSection);
-    }
-});
-
 // Reviews Slideshow Functionality
 function initReviewsSlideshow() {
     const slideshow = document.querySelector('.reviews-slideshow');
@@ -128,11 +117,12 @@ function initReviewsSlideshow() {
     updateSlideshow();
 }
 
-// Initialize when DOM is loaded
+// Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize reviews slideshow
     initReviewsSlideshow();
     
-    // Initialize stats observer
+    // Initialize stats counter
     const aboutSection = document.querySelector('#about');
     if (aboutSection) {
         statsObserver.observe(aboutSection);
