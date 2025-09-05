@@ -285,6 +285,13 @@ p {
     font-size: var(--font-size-lg);
 }
 
+@media (max-width: 768px) {
+    .btn {
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: var(--font-size-md);
+    }
+}
+
 .btn-primary {
     background: #e8e8e8;
     color: #333333;
@@ -984,18 +991,18 @@ p[text-align="center"] {
     }
     
     .floating-card:nth-child(1) {
-        top: 5%;
+        top: 15%;
         left: 10%;
     }
     
     .floating-card:nth-child(3) {
-        top: 40%;
+        top: 50%;
         left: 40%;
     }
 
     .floating-card:nth-child(2) {
-        top: 20%;
-        right: 10%;
+        top: 30%;
+        right: 5%;
     }
 
     .about-content {
@@ -1024,8 +1031,7 @@ p[text-align="center"] {
     }
 
     .hero-cta {
-        justify-content: flex-start;
-        gap: var(--spacing-md);
+        gap: var(--spacing-sm);
     }
 
     .reviews-slideshow {
@@ -1070,6 +1076,17 @@ p[text-align="center"] {
     .recommendations-grid {
         grid-template-columns: 1fr;
         max-width: 500px;
+    }
+
+    .recommendation-card {
+        padding: var(--spacing-xl);
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .recommendation-text {
+        font-size: var(--font-size-base);
+        padding: 0;
     }
 }
 
