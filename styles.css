@@ -1001,12 +1001,14 @@ p[text-align="center"] {
     }
 
     .hero-cta {
-        justify-content: center;
-    }
+    justify-content: flex-start;
+    gap: var(--spacing-md);
+}
     
     .reviews-track .review-card {
-        min-width: calc(100% - var(--spacing-lg));
-        max-width: calc(100% - var(--spacing-lg));
+        min-width: 100%;
+        max-width: 100%;
+        margin: 0 var(--spacing-md);
     }
 }
 
@@ -1020,7 +1022,7 @@ p[text-align="center"] {
     }
 
     .hero-title {
-        font-size: 2rem;
+        font-size: 3rem;
         padding-top: var(--spacing-3xl);
     }
 
@@ -1031,7 +1033,7 @@ p[text-align="center"] {
     .projects-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .recommendations-grid {
         grid-template-columns: 1fr;
         max-width: 500px;
