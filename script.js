@@ -124,6 +124,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize stats counter
     const aboutSection = document.querySelector('#about');
+document.addEventListener('DOMContentLoaded', () => {    // Initialize reviews slideshow
+    initReviewsSlideshow();
+    
+    // Initialize stats counter
+    const aboutSection = document.querySelector('#about');
     if (aboutSection) {
         statsObserver.observe(aboutSection);
     }
