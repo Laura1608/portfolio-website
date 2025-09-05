@@ -38,10 +38,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Send email using SMTP.js
         Email.send({
             Host: "s1.maildns.net",
-            Username: "lauraottosolutions@gmail.com",
-            Password: "fotc ozck lmlw lfdx",
+            Username: "oxqmgbnb",
+            Password: "v40zxQ8*CF2D;j",
             To: 'lauraottosolutions@gmail.com',
-            From: "lauraottosolutions@gmail.com",
+            From: `${formData.email}`,
             Subject: `Contact from Portfolio: ${formData.name}`,
             Body: `
                 <h3>New Contact Form Submission</h3>
