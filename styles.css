@@ -217,6 +217,8 @@ p {
 .hero-container {
     max-width: 1200px;
     margin: 0 auto;
+    margin-top: min(10vh, 100px);
+    margin-bottom: min(10vh, 100px);
     padding: 0 var(--spacing-lg);
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -972,7 +974,9 @@ p[text-align="center"] {
 
     .hero-container {
         grid-template-columns: 1fr;
-        gap: var(--spacing-2xl);
+        gap: var(--spacing-lg);
+        margin-top: min(10vh, 100px);
+        margin-bottom: min(10vh, 100px);
     }
 
     .hero-visual {
@@ -983,7 +987,6 @@ p[text-align="center"] {
         top: 5%;
         left: 10%;
     }
-
     
     .floating-card:nth-child(3) {
         top: 40%;
@@ -1038,6 +1041,11 @@ p[text-align="center"] {
 @media (max-width: 480px) {
     .container {
         padding: 0 var(--spacing-md);
+    }
+
+    .hero-container {
+        margin-top: min(5vh, 50px);
+        margin-bottom: min(5vh, 50px);
     }
 
     .section {

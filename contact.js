@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.contact-form');
     const submitButton = form.querySelector('button[type="submit"]');
     let currentMessage = null;
+    let submitTimeout = null;
 
     function showMessage(message) {
         // Remove any existing message
@@ -49,6 +50,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle form submission
     form.addEventListener('submit', function(e) {
+        // Clear any existing timeout
+        if (submitTimeout) {
+            clearTimeout(submitTimeout);
+        }
+
         const formData = {
             name: form.querySelector('input[name="name"]').value,
             email: form.querySelector('input[name="email"]').value,
@@ -70,5 +76,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         submitButton.disabled = true;
         submitButton.textContent = 'Sending...';
+
+        // Set timeout to show error if submission takes too long
+        submitTimeout = setTimeout(() => {
+            e.preventDefault();
+            submitButton.disabled = false;
+            submitButton.textContent = 'Send Message';
+            showMessage('Something went wrong. Please email me directly at lauraottosolutions@gmail.com');
+        }, 10000); // Show error after 10 seconds
     });
 });
