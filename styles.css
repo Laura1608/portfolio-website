@@ -926,11 +926,13 @@ p[text-align="center"] {
 .form-message {
     background: var(--bg-dark);
     color: white;
-    padding: var(--spacing-md);
+    padding: var(--spacing-lg);
     margin-top: var(--spacing-md);
     border-radius: var(--radius-md);
     text-align: center;
     width: 100%;
+    display: block;
+    font-size: var(--font-size-base);
 }
 
 @keyframes formMessage {

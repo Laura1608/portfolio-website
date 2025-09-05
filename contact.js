@@ -1,12 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.contact-form');
     const submitButton = form.querySelector('button[type="submit"]');
+    let currentMessage = null;
 
     function showMessage(message) {
+        // Remove any existing message
+        if (currentMessage) {
+            currentMessage.remove();
+        }
+
         const messageDiv = document.createElement('div');
         messageDiv.className = 'form-message';
         messageDiv.textContent = message;
-        form.appendChild(messageDiv);
+        
+        // Insert message right after the submit button
+        submitButton.parentNode.insertBefore(messageDiv, submitButton.nextSibling);
+        currentMessage = messageDiv;
     }
 
     form.addEventListener('submit', async function(e) {
@@ -43,22 +52,25 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             const response = await Email.send({
                 Host: "s1.maildns.net",
+                Port: 465,
                 Username: "oxqmgbnb",
                 Password: "v40zxQ8*CF2D;j",
-                Port: 465,
-                To: 'lauraottosolutions@gmail.com',
+                To: "lauraottosolutions@gmail.com",
                 From: "oxqmgbnb@s1.maildns.net",
-                Subject: `Portfolio Contact: ${formData.name}`,
+                ReplyTo: formData.email,
+                Subject: `Contact message Portfolio Website`,
                 Body: `
-                    <h3>New Contact Form Submission</h3>
-                    <p><strong>Name:</strong> ${formData.name}</p>
-                    <p><strong>Email:</strong> ${formData.email}</p>
+                    <h3>Contact Form Message</h3>
+                    <p><strong>From:</strong> ${formData.name} (${formData.email})</p>
                     <p><strong>Message:</strong><br>${formData.message}</p>
                 `
             });
 
-            if (response !== 'OK') {
-                throw new Error('Email not sent: ' + response);
+            if (response === 'OK') {
+                form.reset();
+                showMessage('Message sent successfully');
+            } else {
+                throw new Error(response);
             }
         } catch (err) {
             showMessage('Something went wrong. Please email me directly at lauraottosolutions@gmail.com');
