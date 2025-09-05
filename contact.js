@@ -1,3 +1,22 @@
+function showCustomAlert(website, message) {
+    const alertBox = document.createElement('div');
+    alertBox.className = 'custom-alert';
+    alertBox.innerHTML = `
+        <div class="website">${website}</div>
+        <div class="message">${message}</div>
+        <button class="btn-ok">OK</button>
+    `;
+    document.body.appendChild(alertBox);
+
+    const okButton = alertBox.querySelector('.btn-ok');
+    okButton.focus();
+    
+    okButton.onclick = () => alertBox.remove();
+    alertBox.onclick = (e) => {
+        if (e.target === alertBox) alertBox.remove();
+    };
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.contact-form');
     const submitButton = form.querySelector('button[type="submit"]');
@@ -40,6 +59,8 @@ document.addEventListener('DOMContentLoaded', function() {
             Host: "s1.maildns.net",
             Username: "oxqmgbnb",
             Password: "v40zxQ8*CF2D;j",
+            Port: 465,
+            SSL: true,
             To: 'lauraottosolutions@gmail.com',
             From: `${formData.email}`,
             Subject: `Contact from Portfolio: ${formData.name}`,
@@ -53,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(message => {
             console.log('Email status:', message);
             if (message === 'OK') {
-                alert('Thank you! Your message has been sent.');
+                showCustomAlert('www.lauraotto.nl', 'Thank you! Your message has been sent.');
                 form.reset();
             } else {
                 throw new Error('Email not sent: ' + message);
@@ -61,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(err => {
             console.error('Error sending email:', err);
-            alert('Sorry, there was an error sending your message. Please email me directly at lauraottosolutions@gmail.com');
+            showCustomAlert('www.lauraotto.nl', 'Something went wrong with the form. Please email me directly at lauraottosolutions@gmail.com');
         })
         .finally(() => {
             submitButton.disabled = false;
