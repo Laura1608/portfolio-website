@@ -35,46 +35,37 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Create token from the email password
-        const token = btoa('lauraottosolutions@gmail.com:fotc ozck lmlw lfdx');
-
-        // Send email using Gmail SMTP
-        fetch('https://smtpjs.com/v3/smtp.js')
-            .then(response => {
-                console.log('SMTP.js loaded');
-                return Email.send({
-                    Host: "smtp.gmail.com",
-                    Username: "lauraottosolutions@gmail.com",
-                    Password: "fotc ozck lmlw lfdx",
-                    To: 'lauraottosolutions@gmail.com',
-                    From: "lauraottosolutions@gmail.com",
-                    Subject: `New Contact Form Message from ${formData.name}`,
-                    Body: `
-                        <h3>New Contact Form Submission</h3>
-                        <p><strong>Name:</strong> ${formData.name}</p>
-                        <p><strong>Email:</strong> ${formData.email}</p>
-                        <p><strong>Message:</strong><br>${formData.message}</p>
-                    `
-                });
-            })
-            .then(
-                message => {
-                    console.log('Email status:', message);
-                    if (message === 'OK') {
-                        alert('Thank you! Your message has been sent.');
-                        form.reset();
-                    } else {
-                        throw new Error('Email not sent: ' + message);
-                    }
-                }
-            )
-            .catch(err => {
-                console.error('Error sending email:', err);
-                alert('Sorry, there was an error sending your message. Please try again or email me directly at lauraottosolutions@gmail.com');
-            })
-            .finally(() => {
-                submitButton.disabled = false;
-                submitButton.textContent = originalText;
-            });
+        // Send email using SMTP.js
+        Email.send({
+            Host: "s1.maildns.net",
+            Username: "lauraottosolutions@gmail.com",
+            Password: "fotc ozck lmlw lfdx",
+            To: 'lauraottosolutions@gmail.com',
+            From: "lauraottosolutions@gmail.com",
+            Subject: `Contact from Portfolio: ${formData.name}`,
+            Body: `
+                <h3>New Contact Form Submission</h3>
+                <p><strong>Name:</strong> ${formData.name}</p>
+                <p><strong>Email:</strong> ${formData.email}</p>
+                <p><strong>Message:</strong><br>${formData.message}</p>
+            `
+        })
+        .then(message => {
+            console.log('Email status:', message);
+            if (message === 'OK') {
+                alert('Thank you! Your message has been sent.');
+                form.reset();
+            } else {
+                throw new Error('Email not sent: ' + message);
+            }
+        })
+        .catch(err => {
+            console.error('Error sending email:', err);
+            alert('Sorry, there was an error sending your message. Please email me directly at lauraottosolutions@gmail.com');
+        })
+        .finally(() => {
+            submitButton.disabled = false;
+            submitButton.textContent = originalText;
+        });
     });
 });

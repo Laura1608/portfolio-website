@@ -119,76 +119,54 @@ function initReviewsSlideshow() {
     
     let currentIndex = 0;
     const totalSlides = cards.length;
-    let slideshowInterval;
     
-               function updateSlideshow() {
-               const cardWidth = cards[0].offsetWidth + parseInt(getComputedStyle(cards[0]).marginRight);
-               const translateX = -currentIndex * cardWidth;
-               track.style.transform = `translateX(${translateX}px)`;
-               
-               // Show/hide navigation arrows based on current position
-               if (prevBtn) {
-                   prevBtn.style.display = currentIndex === 0 ? 'none' : 'flex';
-               }
-               if (nextBtn) {
-                   nextBtn.style.display = currentIndex === totalSlides - 1 ? 'none' : 'flex';
-               }
-           }
-    
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        updateSlideshow();
+    function updateSlideshow() {
+        const slideWidth = window.innerWidth <= 768 ? 100 : 43.5;
+        track.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
     }
-    
-    function prevSlide() {
-        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-        updateSlideshow();
-    }
-    
-    function startAutoAdvance() {
-        slideshowInterval = setInterval(nextSlide, 4000);
-    }
-    
-    function stopAutoAdvance() {
-        if (slideshowInterval) {
-            clearInterval(slideshowInterval);
+
+    // Auto-advance every 4 seconds
+    setInterval(() => {
+        if (currentIndex < totalSlides - 1) {
+            currentIndex++;
+        } else {
+            currentIndex = 0;
         }
-    }
+        updateSlideshow();
+    }, 4000);
     
-    // Navigation button event listeners
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
-            stopAutoAdvance();
-            nextSlide();
-            startAutoAdvance();
+            if (currentIndex < totalSlides - 1) {
+                currentIndex++;
+                updateSlideshow();
+            }
         });
     }
     
     if (prevBtn) {
         prevBtn.addEventListener('click', () => {
-            stopAutoAdvance();
-            prevSlide();
-            startAutoAdvance();
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlideshow();
+            }
         });
     }
-    
-    // Pause slideshow on hover
-    slideshow.addEventListener('mouseenter', () => {
-        stopAutoAdvance();
-    });
-    
-    // Resume slideshow when mouse leaves
-    slideshow.addEventListener('mouseleave', () => {
-        startAutoAdvance();
-    });
-    
+
     // Update on window resize
-    window.addEventListener('resize', () => {
-        currentIndex = 0;
-        updateSlideshow();
-    });
+    window.addEventListener('resize', updateSlideshow);
     
     // Initial setup
     updateSlideshow();
-    startAutoAdvance();
 }
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    initReviewsSlideshow();
+    
+    // Initialize stats observer
+    const aboutSection = document.querySelector('#about');
+    if (aboutSection) {
+        statsObserver.observe(aboutSection);
+    }
+});
