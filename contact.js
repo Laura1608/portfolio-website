@@ -51,8 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 showMessage('The message is taking longer than expected to send. Please try again.', true);
             }, 10000); // 10 seconds timeout
 
-            console.log('Making fetch request to /api/contact...');
-            const response = await fetch('/api/contact', {
+            const response = await fetch('https://lauraotto.nl/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
