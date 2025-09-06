@@ -43,15 +43,13 @@ document.addEventListener('DOMContentLoaded', function() {
         submitButton.textContent = 'Sending...';
 
         try {
-            console.log('Attempting to send message...');
             const controller = new AbortController();
             const timeoutId = setTimeout(() => {
-                console.log('Request timed out after 10 seconds');
                 controller.abort();
                 showMessage('The message is taking longer than expected to send. Please try again.', true);
             }, 10000); // 10 seconds timeout
 
-            const response = await fetch('https://lauraotto.nl/api/contact', {
+            const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -59,11 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify(formData),
                 signal: controller.signal
             });
-            console.log('Received response:', response.status, response.statusText);
-
             clearTimeout(timeoutId);
             const result = await response.json();
-            console.log('Parsed response:', result);
 
             if (result.success) {
                 form.reset();

@@ -1,39 +1,37 @@
 const express = require('express');
 const path = require('path');
-const nodemailer = require('nodemailer');
+const SibApiV3Sdk = require('@getbrevo/brevo');
 const app = express();
+
+// Configure Brevo API client
+let apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+let apiKey = apiInstance.authentications['apiKey'];
+apiKey.apiKey = process.env.BREVO_API_KEY;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// CORS middleware
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://lauraotto.nl');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    if (req.method === 'OPTIONS') {
-        return res.sendStatus(200);
-    }
-    next();
-});
-
 // Serve static files
 app.use(express.static(__dirname));
 
-// Email transporter setup
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    pool: true,
-    maxConnections: 3,
-    maxMessages: 100,
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
+// Email sending setup
+const sendEmail = async (to, subject, textContent, htmlContent) => {
+    const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
+    sendSmtpEmail.to = [{ email: to }];
+    sendSmtpEmail.subject = subject;
+    sendSmtpEmail.htmlContent = htmlContent;
+    sendSmtpEmail.textContent = textContent;
+    
+    try {
+        const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
+        console.log('Email sent successfully. MessageId:', data.messageId);
+        return true;
+    } catch (error) {
+        console.error('Error sending email:', error);
+        throw error;
     }
-});
+};
 
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
@@ -44,30 +42,24 @@ app.post('/api/contact', async (req, res) => {
         return res.status(400).json({ error: 'Please fill in all fields' });
     }
 
-    const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: process.env.EMAIL_USER,
-        replyTo: email,
-        subject: `Portfolio Contact: ${name}`,
-        text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-        html: `<h3>New Contact Form Submission</h3>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <h4>Message:</h4>
-            <p>${message.replace(/\n/g, '<br>')}</p>`
-    };
+    const htmlContent = `<h3>New Contact Form Submission</h3>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <h4>Message:</h4>
+        <p>${message.replace(/\n/g, '<br>')}</p>`;
+    
+    const textContent = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
 
     try {
-        const info = await transporter.sendMail(mailOptions);
+        await sendEmail(
+            process.env.ADMIN_EMAIL, 
+            `Portfolio Contact: ${name}`,
+            textContent,
+            htmlContent
+        );
         res.json({ success: true });
     } catch (error) {
-        console.error('Detailed email error:', {
-            code: error.code,
-            command: error.command,
-            response: error.response,
-            responseCode: error.responseCode,
-            message: error.message
-        });
+        console.error('Failed to send email:', error);
         res.status(500).json({ error: 'Failed to send email. Please try again.' });
     }
 });
