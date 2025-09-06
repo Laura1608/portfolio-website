@@ -4,8 +4,9 @@ const brevo = require('@getbrevo/brevo');
 const app = express();
 
 // Configure Brevo API client
+const defaultClient = brevo.ApiClient.instance;
+defaultClient.authentications['api-key'].apiKey = process.env.BREVO_API_KEY;
 const apiInstance = new brevo.TransactionalEmailsApi();
-apiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY);
 
 // Middleware to parse JSON bodies
 app.use(express.json());
