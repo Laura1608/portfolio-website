@@ -12,10 +12,15 @@ app.use(express.static(__dirname));
 
 // Email transporter setup
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
+    },
+    tls: {
+        rejectUnauthorized: true
     }
 });
 
@@ -34,13 +39,11 @@ app.post('/api/contact', async (req, res) => {
         replyTo: email,
         subject: `Portfolio Contact: ${name}`,
         text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-        html: `
-            <h3>New Contact Form Submission</h3>
+        html: `<h3>New Contact Form Submission</h3>
             <p><strong>Name:</strong> ${name}</p>
             <p><strong>Email:</strong> ${email}</p>
             <h4>Message:</h4>
-            <p>${message.replace(/\n/g, '<br>')}</p>
-        `
+            <p>${message.replace(/\n/g, '<br>')}</p>`
     };
 
     try {
@@ -48,7 +51,12 @@ app.post('/api/contact', async (req, res) => {
         res.json({ success: true });
     } catch (error) {
         console.error('Email error:', error);
-        res.status(500).json({ error: 'Failed to send email' });
+        const errorMessage = error.code === 'ETIMEDOUT' 
+            ? 'Connection to email server timed out. Please try again.'
+            : error.code === 'EAUTH' 
+                ? 'Email authentication failed. Please contact the administrator.'
+                : 'Failed to send email. Please try again later.';
+        res.status(500).json({ error: errorMessage });
     }
 });
 

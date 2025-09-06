@@ -43,14 +43,22 @@ document.addEventListener('DOMContentLoaded', function() {
         submitButton.textContent = 'Sending...';
 
         try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => {
+                controller.abort();
+                showMessage('The message is taking longer than expected to send. Please try again.', true);
+            }, 8000); // 8 seconds timeout
+
             const response = await fetch('/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(formData),
+                signal: controller.signal
             });
 
+            clearTimeout(timeoutId);
             const result = await response.json();
 
             if (result.success) {
@@ -60,8 +68,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error(result.error || 'Failed to send message');
             }
         } catch (error) {
+            if (error.name === 'AbortError') {
+                // Timeout was already handled in the abort callback
+                return;
+            }
             showMessage(`Something went wrong. Please email me directly at lauraottosolutions@gmail.com (${error.message})`, true);
         } finally {
+            if (!submitButton.disabled) return; // Don't reset if already reset by timeout
             submitButton.disabled = false;
             submitButton.textContent = 'Send Message';
         }
