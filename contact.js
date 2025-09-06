@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const timeoutId = setTimeout(() => {
                 controller.abort();
                 showMessage('The message is taking longer than expected to send. Please try again.', true);
-            }, 8000); // 8 seconds timeout
+            }, 10000); // 10 seconds timeout
 
             const response = await fetch('/api/contact', {
                 method: 'POST',

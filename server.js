@@ -13,15 +13,16 @@ app.use(express.static(__dirname));
 // Email transporter setup
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+    port: 587,
+    secure: false,
+    requireTLS: true,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
     },
-    tls: {
-        rejectUnauthorized: true
-    }
+    connectionTimeout: 10000, // 10 seconds
+    greetingTimeout: 5000,    // 5 seconds
+    socketTimeout: 10000      // 10 seconds
 });
 
 // Contact form endpoint
