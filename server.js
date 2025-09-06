@@ -13,16 +13,15 @@ app.use(express.static(__dirname));
 // Email transporter setup
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
-    requireTLS: true,
+    port: 465,
+    secure: true,
+    pool: true,
+    maxConnections: 3,
+    maxMessages: 100,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
-    },
-    connectionTimeout: 10000, // 10 seconds
-    greetingTimeout: 5000,    // 5 seconds
-    socketTimeout: 10000      // 10 seconds
+    }
 });
 
 // Contact form endpoint
@@ -48,16 +47,17 @@ app.post('/api/contact', async (req, res) => {
     };
 
     try {
-        await transporter.sendMail(mailOptions);
+        const info = await transporter.sendMail(mailOptions);
         res.json({ success: true });
     } catch (error) {
-        console.error('Email error:', error);
-        const errorMessage = error.code === 'ETIMEDOUT' 
-            ? 'Connection to email server timed out. Please try again.'
-            : error.code === 'EAUTH' 
-                ? 'Email authentication failed. Please contact the administrator.'
-                : 'Failed to send email. Please try again later.';
-        res.status(500).json({ error: errorMessage });
+        console.error('Detailed email error:', {
+            code: error.code,
+            command: error.command,
+            response: error.response,
+            responseCode: error.responseCode,
+            message: error.message
+        });
+        res.status(500).json({ error: 'Failed to send email. Please try again.' });
     }
 });
 
