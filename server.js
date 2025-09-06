@@ -1,11 +1,11 @@
 const express = require('express');
 const path = require('path');
-const SibApiV3Sdk = require('@getbrevo/brevo');
+const brevo = require('@getbrevo/brevo');
 const app = express();
 
 // Configure Brevo API client
-let apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-let apiKey = apiInstance.authentications['apiKey'];
+const apiInstance = new brevo.TransactionalEmailsApi();
+const apiKey = apiInstance.authentications['api-key'];
 apiKey.apiKey = process.env.BREVO_API_KEY;
 
 // Middleware to parse JSON bodies
@@ -17,7 +17,8 @@ app.use(express.static(__dirname));
 
 // Email sending setup
 const sendEmail = async (to, subject, textContent, htmlContent) => {
-    const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
+    const sendSmtpEmail = new brevo.SendSmtpEmail();
+    sendSmtpEmail.sender = { email: process.env.ADMIN_EMAIL, name: 'Laura Otto Portfolio' };
     sendSmtpEmail.to = [{ email: to }];
     sendSmtpEmail.subject = subject;
     sendSmtpEmail.htmlContent = htmlContent;
