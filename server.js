@@ -79,3 +79,9 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+//To start the server:
+//Open terminal/command prompt in your project directory
+//Run: node server.js
+//You should see: Server running on port 3000
+//Open browser and go to: http://localhost:3000/index.html
