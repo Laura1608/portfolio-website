@@ -1,12 +1,14 @@
 const express = require('express');
 const path = require('path');
-const http = require('http');
 const brevo = require('@getbrevo/brevo');
+const { google } = require('googleapis');
 const app = express();
 
-// Flask waitlist app (run from ai-masterclass folder: python app.py)
-const WAITLIST_APP_PORT = process.env.WAITLIST_APP_PORT || 5000;
-const WAITLIST_APP_HOST = 'localhost';
+// Google Sheets config for AI Masterclass waitlist
+const SHEET_ID = '1ZUH0W_WmTxSDAOVh-gGHkQyYnkY4oxIiqEzhkG6g0FI';
+const SHEET_NAME = 'Sheet1';
+const COLUMNS = ['email', 'date'];
+const GOOGLE_CREDENTIALS_ENV = 'GOOGLE_CREDENTIALS_JSON';
 
 // Configure Brevo API client
 const defaultClient = brevo.ApiClient.instance;
@@ -20,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files
 app.use(express.static(__dirname));
 
-// Email sending setup
+// Email sending setup (Brevo)
 const sendEmail = async (to, subject, textContent, htmlContent) => {
     const sendSmtpEmail = new brevo.SendSmtpEmail();
     sendSmtpEmail.sender = { email: process.env.ADMIN_EMAIL, name: 'Laura Otto Portfolio' };
@@ -39,32 +41,135 @@ const sendEmail = async (to, subject, textContent, htmlContent) => {
     }
 };
 
-// Proxy waitlist signup to Flask app in ai-masterclass (when running)
-app.post('/ai-masterclass/api/subscribe', (req, res) => {
-    const body = JSON.stringify(req.body || {});
-    const options = {
-        hostname: WAITLIST_APP_HOST,
-        port: WAITLIST_APP_PORT,
-        path: '/api/subscribe',
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(body),
-        },
-    };
-    const proxyReq = http.request(options, (proxyRes) => {
-        let data = '';
-        proxyRes.on('data', (chunk) => { data += chunk; });
-        proxyRes.on('end', () => {
-            res.status(proxyRes.statusCode).set(proxyRes.headers).send(data || undefined);
+// --- Google Sheets helpers for AI Masterclass waitlist ---
+
+const getGoogleCredentials = () => {
+    const json = process.env[GOOGLE_CREDENTIALS_ENV];
+    if (!json) {
+        console.error(`Environment variable ${GOOGLE_CREDENTIALS_ENV} is not set.`);
+        return null;
+    }
+    try {
+        return JSON.parse(json);
+    } catch (err) {
+        console.error('Error parsing Google credentials JSON:', err.message);
+        return null;
+    }
+};
+
+const getSheetsClient = async () => {
+    const creds = getGoogleCredentials();
+    if (!creds) {
+        throw new Error('Google credentials not configured');
+    }
+
+    const auth = new google.auth.GoogleAuth({
+        credentials: creds,
+        scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    });
+
+    const authClient = await auth.getClient();
+    return google.sheets({ version: 'v4', auth: authClient });
+};
+
+const saveEmailToSheets = async (emailRaw) => {
+    if (!emailRaw || !emailRaw.trim()) {
+        console.error('Invalid email');
+        return false;
+    }
+
+    const email = emailRaw.trim().toLowerCase();
+    const sheets = await getSheetsClient();
+    const now = new Date().toISOString().replace('T', ' ').substring(0, 19);
+
+    // Get existing data
+    const getRes = await sheets.spreadsheets.values.get({
+        spreadsheetId: SHEET_ID,
+        range: `${SHEET_NAME}!A:B`,
+    });
+
+    const rows = getRes.data.values || [];
+
+    // If sheet is empty, add headers and first row
+    if (!rows.length) {
+        await sheets.spreadsheets.values.update({
+            spreadsheetId: SHEET_ID,
+            range: `${SHEET_NAME}!A1:B1`,
+            valueInputOption: 'RAW',
+            requestBody: { values: [COLUMNS] },
         });
+        await sheets.spreadsheets.values.append({
+            spreadsheetId: SHEET_ID,
+            range: `${SHEET_NAME}!A:B`,
+            valueInputOption: 'USER_ENTERED',
+            requestBody: { values: [[email, now]] },
+        });
+        return true;
+    }
+
+    // Ensure header row matches (optional, but keeps things tidy)
+    const header = rows[0] || [];
+    if (header.join(',') !== COLUMNS.join(',')) {
+        await sheets.spreadsheets.values.update({
+            spreadsheetId: SHEET_ID,
+            range: `${SHEET_NAME}!A1:B1`,
+            valueInputOption: 'RAW',
+            requestBody: { values: [COLUMNS] },
+        });
+    }
+
+    // Check for duplicate email
+    const existingEmails = rows
+        .slice(1)
+        .map((r) => (r[0] || '').toString().toLowerCase());
+
+    if (existingEmails.includes(email)) {
+        return true;
+    }
+
+    // Append new email row
+    await sheets.spreadsheets.values.append({
+        spreadsheetId: SHEET_ID,
+        range: `${SHEET_NAME}!A:B`,
+        valueInputOption: 'USER_ENTERED',
+        requestBody: { values: [[email, now]] },
     });
-    proxyReq.on('error', (err) => {
-        console.error('Waitlist proxy error:', err.message);
-        res.status(502).json({ success: false, error: 'Waitlist service unavailable. Please try again later.' });
-    });
-    proxyReq.write(body);
-    proxyReq.end();
+
+    return true;
+};
+
+// Waitlist signup endpoint for AI Masterclass (single-service setup)
+app.post('/ai-masterclass/api/subscribe', async (req, res) => {
+    try {
+        const { email } = req.body || {};
+
+        if (!email || !email.trim()) {
+            return res.status(400).json({
+                success: false,
+                error: 'Email is required',
+            });
+        }
+
+        const ok = await saveEmailToSheets(email);
+
+        if (!ok) {
+            return res.status(500).json({
+                success: false,
+                error: 'Failed to save email. Please try again later.',
+            });
+        }
+
+        return res.json({
+            success: true,
+            message: 'Email saved successfully',
+        });
+    } catch (err) {
+        console.error('AI Masterclass waitlist error:', err.message);
+        return res.status(500).json({
+            success: false,
+            error: 'Server error while saving to waitlist. Please try again later.',
+        });
+    }
 });
 
 // Contact form endpoint
