@@ -1,7 +1,12 @@
 const express = require('express');
 const path = require('path');
+const http = require('http');
 const brevo = require('@getbrevo/brevo');
 const app = express();
+
+// Flask waitlist app (run from ai-masterclass folder: python app.py)
+const WAITLIST_APP_PORT = process.env.WAITLIST_APP_PORT || 5000;
+const WAITLIST_APP_HOST = 'localhost';
 
 // Configure Brevo API client
 const defaultClient = brevo.ApiClient.instance;
@@ -33,6 +38,34 @@ const sendEmail = async (to, subject, textContent, htmlContent) => {
         throw error;
     }
 };
+
+// Proxy waitlist signup to Flask app in ai-masterclass (when running)
+app.post('/ai-masterclass/api/subscribe', (req, res) => {
+    const body = JSON.stringify(req.body || {});
+    const options = {
+        hostname: WAITLIST_APP_HOST,
+        port: WAITLIST_APP_PORT,
+        path: '/api/subscribe',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(body),
+        },
+    };
+    const proxyReq = http.request(options, (proxyRes) => {
+        let data = '';
+        proxyRes.on('data', (chunk) => { data += chunk; });
+        proxyRes.on('end', () => {
+            res.status(proxyRes.statusCode).set(proxyRes.headers).send(data || undefined);
+        });
+    });
+    proxyReq.on('error', (err) => {
+        console.error('Waitlist proxy error:', err.message);
+        res.status(502).json({ success: false, error: 'Waitlist service unavailable. Please try again later.' });
+    });
+    proxyReq.write(body);
+    proxyReq.end();
+});
 
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
@@ -68,6 +101,11 @@ app.post('/api/contact', async (req, res) => {
 // Main route
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// AI Masterclass page
+app.get('/masterclass-ai', (req, res) => {
+    res.sendFile(path.join(__dirname, 'masterclass-ai.html'));
 });
 
 // Handle 404

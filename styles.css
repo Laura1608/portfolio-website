@@ -496,7 +496,6 @@ p[text-align="center"] {
 
 .project-card:hover {
     box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
 }
 
 .project-card-front {
@@ -622,8 +621,12 @@ p[text-align="center"] {
 }
 
 .project-card.featured:hover {
-    transform: translateY(-2px);
     transition: all 0.3s ease;
+}
+
+/* Ensure anchor scroll for AI Masterclass lands above the card (accounting for fixed navbar) */
+#ai-masterclass {
+    scroll-margin-top: 100px;
 }
 
 /* Skills Section */
@@ -733,7 +736,6 @@ p[text-align="center"] {
 }
 
 .review-card:hover {
-    transform: translateY(-5px);
     transition: all 0.3s ease;
     box-shadow: var(--shadow-lg);
 }
@@ -792,7 +794,6 @@ p[text-align="center"] {
 }
 
 .recommendation-card:hover {
-    transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
 }
 

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Masterclass Waiting List</title>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Using Inter as the high-trust, clean font */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* A subtle gradient for the hero button for a modern feel */
+        .btn-primary {
+            background-image: linear-gradient(to right, #14b8a6, #0d9488);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+            transform: translateY(-2px);
+        }
+        /* Gradient background for final CTA section */
+        .bg-gradient-primary {
+            background-image: linear-gradient(to right, #14b8a6, #0d9488);
+        }
+        /* Lighter/transparent image styling */
+        .problem-image,
+        .image-problem-section {
+            opacity: 0.4;
+            filter: brightness(1.2);
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            transform: scaleX(-1);
+        }
+    </style>
+</head>
+<body class="bg-teal-50 text-teal-800">
+
+    <!-- Back to portfolio -->
+    <div class="max-w-3xl mx-auto px-6 pt-6">
+        <a href="index.html#ai-masterclass" class="inline-flex items-center gap-2 text-teal-600 hover:text-teal-800 font-medium text-sm">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to portfolio
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- === SECTION 1: Above the Fold === -->
+        <section class="py-20 md:py-28">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl mx-auto font-bold tracking-tight text-teal-900 leading-tight">
+                    Stop Wondering About AI. Start Building With It.
+                </h1>
+                <p class="mt-6 text-xl md:text-2xl max-w-3xl mx-auto text-teal-800 leading-relaxed">
+                    A hands-on masterclass for entrepreneurs, marketers, and creators. Learn to build your own AI-powered web apps—no advanced technical skills required.
+                </p>
+                
+                <!-- Waitlist Form (Hero) -->
+                <div id="form-container-1" class="mt-5">
+                    <p class="text-base font-semibold text-teal-600 mb-1">
+                        Join the waitlist for a 15% early-bird discount
+                    </p>
+                    <form id="waitlist-form-1" class="mt-6 flex flex-col sm:flex-row gap-3 justify-center max-w-lg mx-auto">
+                        <input
+                            id="email-input-1"
+                            type="email"
+                            required
+                            placeholder="Your Email Address"
+                            class="w-full sm:w-72 flex-auto px-4 py-3 border border-teal-300 rounded-lg shadow-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                        />
+                        <button
+                            type="submit"
+                            class="btn-primary text-white font-semibold px-8 py-3 rounded-lg shadow-lg flex items-center justify-center gap-2 whitespace-nowrap"
+                        >
+                            Join the Waitlist
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                    <p class="mt-4 text-sm text-teal-800">
+                        No spam. Just a notification when it's ready.
+                    </p>
+                </div>
+                
+                <!-- Success Message (Hero) -->
+                <div id="success-message-1" class="hidden mt-12 p-6 bg-emerald-100 text-emerald-800 rounded-lg shadow-md">
+                    <p class="text-xl font-semibold">You're on the list!</p>
+                    <p class="mt-2">Thank you for joining. We'll be in touch with updates soon.</p>
+                </div>
+                
+                <!-- Error Message (Hero) -->
+                <div id="error-message-1" class="hidden mt-12 p-6 bg-red-100 text-red-800 rounded-lg shadow-md">
+                    <p class="text-xl font-semibold">Something went wrong</p>
+                    <p class="mt-2" id="error-text-1">Please try again later.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SECTION 2: The Path Forward (Problem/Solution) === -->
+        <section class="py-20 md:py-20 bg-white">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-teal-900 text-center mb-12">
+                    The Gap Between Ideas and Execution
+                </h2>
+                
+                <div class="max-w-5xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-10 md:gap-12">
+                        <!-- The Problem -->
+                        <div class="bg-teal-50/60 rounded-2xl p-8 md:p-10 border border-teal-200 h-full flex flex-col">
+                            <h3 class="text-3xl font-bold text-teal-900 mb-4">The Problem</h3>
+                            <p class="text-lg md:text-md text-teal-800 mb-6 leading-relaxed">
+                                You know AI is important, but the path to using it for executing your <span class="font-semibold text-teal-900">own ideas</span> isn't clear. 
+                            </p>
+                            <p class="text-base text-teal-800 leading-relaxed mb-6">
+                                The tech field might feel overwhelming, and it can seem like you only have three options:
+                            </p>
+                            <div class="space-y-2">
+                                <div class="flex items-start gap-4 bg-white rounded-xl p-4 border border-teal-200">
+                                    <i data-lucide="x-circle" class="w-5 h-5 text-teal-400 flex-shrink-0 mt-0.5"></i>
+                                    <p class="text-teal-800">Use <strong>"off-the-shelf" tools</strong> that don't fit your specific needs.</p>
+                                </div>
+                                <div class="flex items-start gap-4 bg-white rounded-xl p-4 border border-teal-200">
+                                    <i data-lucide="x-circle" class="w-5 h-5 text-teal-400 flex-shrink-0 mt-0.5"></i>
+                                    <p class="text-teal-800">Face a <strong>mountain of complex code</strong> that takes months to wrap your head around.</p>
+                                </div>
+                                <div class="flex items-start gap-4 bg-white rounded-xl p-4 border border-teal-200">
+                                    <i data-lucide="x-circle" class="w-5 h-5 text-teal-400 flex-shrink-0 mt-0.5"></i>
+                                    <p class="text-teal-800">Hire developers who cost you <strong>$1,000s</strong> to build your idea.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- The Solution -->
+                        <div class="bg-teal-50/60 rounded-2xl p-8 md:p-10 border border-teal-200 h-full flex flex-col">
+                            <h3 class="text-3xl font-bold text-teal-900 mb-4">The Solution</h3>
+                            <p class="text-lg md:text-md text-teal-800 mb-4 leading-relaxed">
+                                But there's another way. You can start forming <span class="font-semibold text-teal-900">your own army</span> of AI-powered tools.
+                            </p>
+                            <p class="text-base text-teal-800 leading-relaxed mb-6 mt-2">
+                                This masterclass gives you the "lego blocks" of building with AI (the essential <span class="font-bold text-teal-900">20% skills that unlock 80% of your ideas</span>) plus mentoring to help you along the way.
+                            </p>
+                            <div class="bg-white border-2 border-teal-300 rounded-xl p-6 shadow-sm">
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-shrink-0 bg-teal-100 rounded-lg p-2">
+                                        <i data-lucide="check-circle" class="w-6 h-6 text-teal-600"></i>
+                                    </div>
+                                    <p class="text-md text-teal-800 leading-relaxed">
+                                        <span class="font-semibold text-teal-900">You'll learn by doing and finish with real, working tools you built yourself</span>—from a custom marketing copy generator that saves you hours each week, to an automated lead qualifier for smarter, data-driven decisions.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Arrow/Transition Visual -->
+                <div class="w-full flex justify-center items-center pt-2 mt-8">
+                    <div class="bg-teal-100 rounded-full p-3">
+                        <i data-lucide="arrow-down" class="w-8 h-8 text-teal-600"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SECTION 3: Who Is This For? === -->
+        <section class="py-20 md:py-20 bg-teal-50">
+            <div class="max-w-5xl mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-teal-900 text-center mb-4">
+                    This Masterclass Is for You If...
+                </h2>
+                <p class="text-center text-xl text-teal-800 mt-4 mb-12">Find yourself in one of these roles? You're in the right place.</p>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Persona 1 -->
+                    <div class="group bg-gradient-to-br from-white to-teal-50/30 p-6 rounded-xl border border-teal-200 hover:border-teal-300 hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 bg-teal-100 group-hover:bg-teal-200 rounded-lg p-3 transition-colors">
+                                <i data-lucide="rocket" class="w-6 h-6 text-teal-600"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-teal-900 mb-2">Entrepreneur</h3>
+                                <p class="text-teal-800 leading-relaxed">Build your own AI-powered tools without depending on expensive developers.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Persona 4 -->
+                    <div class="group bg-gradient-to-br from-white to-teal-50/30 p-6 rounded-xl border border-teal-200 hover:border-teal-300 hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 bg-teal-100 group-hover:bg-teal-200 rounded-lg p-3 transition-colors">
+                                <i data-lucide="sparkles" class="w-6 h-6 text-teal-600"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-teal-900 mb-2">Creator</h3>
+                                <p class="text-teal-800 leading-relaxed">Build an AI-powered portfolio that shows your skills and sets you apart from the competition.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Persona 3 -->
+                    <div class="group bg-gradient-to-br from-white to-teal-50/30 p-6 rounded-xl border border-teal-200 hover:border-teal-300 hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 bg-teal-100 group-hover:bg-teal-200 rounded-lg p-3 transition-colors">
+                                <i data-lucide="layers" class="w-6 h-6 text-teal-600"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-teal-900 mb-2">Product Manager</h3>
+                                <p class="text-teal-800 leading-relaxed">Truly understand the tech you're working with and communicate effectively with others.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Persona 2 -->
+                    <div class="group bg-gradient-to-br from-white to-teal-50/30 p-6 rounded-xl border border-teal-200 hover:border-teal-300 hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 bg-teal-100 group-hover:bg-teal-200 rounded-lg p-3 transition-colors">
+                                <i data-lucide="trending-up" class="w-6 h-6 text-teal-600"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-teal-900 mb-2">Marketer</h3>
+                                <p class="text-teal-800 leading-relaxed">Create custom lead-gen tools without waiting for the dev team to prioritize your requests.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Persona 5 - Centered -->
+                <div class="flex justify-center mt-8">
+                    <div class="group bg-gradient-to-br from-white to-teal-50/30 p-6 rounded-xl border border-teal-200 hover:border-teal-300 hover:shadow-lg transition-all duration-300 w-full md:w-1/2">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 bg-teal-100 group-hover:bg-teal-200 rounded-lg p-3 transition-colors">
+                                <i data-lucide="lightbulb" class="w-6 h-6 text-teal-600"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-teal-900 mb-2">Curious Professional</h3>
+                                <p class="text-teal-800 leading-relaxed">You believe the best way to learn is by building. You're ready to turn curiosity into capability.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- === SECTION 4: What You Will Learn === -->
+        <section class="py-20 md:py-16 bg-white">
+            <div class="max-w-3xl mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-teal-900 text-center">
+                    A Practical, Project-Based Approach
+                </h2>
+                <p class="text-center text-xl text-teal-800 mt-4 mb-12">This masterclass focuses on what works. You will learn to:</p>
+                
+                <ul class="mt-12 space-y-6">
+                    <!-- Item 1 -->
+                    <li class="flex items-start gap-4">
+                        <div class="flex-shrink-0 bg-teal-100 text-teal-600 rounded-full p-2 flex items-center justify-center">
+                            <i data-lucide="check" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-teal-900">Build & Launch a Simple Web App</h4>
+                            <p class="text-teal-800">Go from an idea to a live AI-powered tool that you can share with others.</p>
+                        </div>
+                    </li>
+                    <!-- Item 2 -->
+                    <li class="flex items-start gap-4">
+                        <div class="flex-shrink-0 bg-teal-100 text-teal-600 rounded-full p-2 flex items-center justify-center">
+                            <i data-lucide="check" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-teal-900">Create Your Own AI Tool</h4>
+                            <p class="text-teal-800">Build a custom "Marketing Copy Generator" or "Idea Analyzer" to grow your business.</p>
+                        </div>
+                    </li>
+                    <!-- Item 3 -->
+                    <li class="flex items-start gap-4">
+                        <div class="flex-shrink-0 bg-teal-100 text-teal-600 rounded-full p-2 flex items-center justify-center">
+                            <i data-lucide="check" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-teal-900">Master Practical Prompt Engineering</h4>
+                            <p class="text-teal-800">Understand how to "talk" to AI to get reliable, high-quality results for your projects.</p>
+                        </div>
+                    </li>
+                    <!-- Item 5 -->
+                    <li class="flex items-start gap-4">
+                        <div class="flex-shrink-0 bg-teal-100 text-teal-600 rounded-full p-2 flex items-center justify-center">
+                            <i data-lucide="check" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-teal-900">Connect AI to Your Workflow</h4>
+                            <p class="text-teal-800">Learn the basics of how to make AI tools talk to apps you already use, like Notion, Google Sheets, or Slack.</p>
+                        </div>
+                    </li>
+                    <!-- Item 6 -->
+                    <li class="flex items-start gap-4">
+                        <div class="flex-shrink-0 bg-teal-100 text-teal-600 rounded-full p-2 flex items-center justify-center">
+                            <i data-lucide="check" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-teal-900">1-on-1 Mentoring Sessions</h4>
+                            <p class="text-teal-800">Get personalized guidance as you build your projects and bring your ideas to life.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- === SECTION 5: Key Message === -->
+        <section class="py-20 md:py-16 bg-white">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <p class="text-2xl md:text-3xl font-semibold text-teal-900 leading-relaxed italic">
+                    "You don't need to be a programmer. You simply need to be a clear communicator with good ideas."
+                </p>
+            </div>
+        </section>
+
+        <!-- === SECTION 6: About the Instructor === -->
+        <section class="py-20 md:py-16 bg-teal-50">
+            <div class="max-w-4xl mx-auto px-6 text-center"> 
+                <img 
+                    src="ai-masterclass/laura-otto-profile.jpg"
+                    alt="Laura Otto"
+                    class="w-32 h-32 rounded-full mx-auto shadow-xl object-cover"
+                />
+                <h3 class="mt-6 text-2xl font-semibold text-teal-900">
+                    A Note From Your Instructor
+                </h3>
+                
+                <div class="mt-8 text-lg md:text-lg text-teal-800 leading-relaxed max-w-2xl mx-auto text-left border-l-4 border-teal-500 pl-6 bg-white p-8 rounded-lg shadow-sm">
+                    <p>Hi, I'm Laura! As a <strong class="text-teal-900">founder</strong>, I've spent my career learning how to write code, work smarter, and build with AI from scratch. As a <strong class="text-teal-900">mentor</strong>, I've seen exactly where ambitious, non-technical people get stuck—and how to get them unstuck.
+                    <br /><br />
+                    This masterclass is not about showing you 'cool AI tricks' or making you a full-stack developer; it's to make you <strong class="text-teal-900">autonomous</strong> and <strong class="text-teal-900">capable of doing anything</strong> you put your mind to.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SECTION 7: Final CTA === -->
+        <section class="py-24 md:py-24 bg-gradient-primary text-white">
+            <div class="max-w-3xl mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold">
+                    Be the First to Know
+                </h2>
+                <p class="mt-4 text-xl text-teal-50">
+                    We'll be launching soon. Join the waitlist to get an email when it's live, along with an exclusive <strong>15% early-bird discount</strong>.
+                </p>
+                
+                <!-- Waitlist Form (Footer) -->
+                <div id="form-container-2" class="mt-12">
+                    <form id="waitlist-form-2" class="mt-6 flex flex-col sm:flex-row gap-3 justify-center max-w-lg mx-auto">
+                        <input
+                            id="email-input-2"
+                            type="email"
+                            required
+                            placeholder="Your Email Address"
+                            class="w-full sm:w-72 flex-auto px-4 py-3 border border-transparent text-teal-900 rounded-lg shadow-sm focus:ring-2 focus:ring-white focus:outline-none"
+                        />
+                        <button
+                            type="submit"
+                            class="bg-teal-50 text-teal-800 font-semibold px-6 py-3 rounded-lg shadow-lg flex items-center justify-center gap-2"
+
+                            >
+                            Join the Waitlist
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Success Message (Footer) -->
+                <div id="success-message-2" class="hidden mt-8 p-6 bg-white/20 backdrop-blur-sm text-white rounded-lg shadow-md border border-white/30">
+                    <p class="text-xl font-semibold">You're on the list!</p>
+                    <p class="mt-2 text-teal-50">Thank you for joining. We'll be in touch with updates soon.</p>
+                </div>
+                
+                <!-- Error Message (Footer) -->
+                <div id="error-message-2" class="hidden mt-12 p-6 bg-white/20 backdrop-blur-sm text-white rounded-lg shadow-md border border-white/30">
+                    <p class="text-xl font-semibold">Something went wrong</p>
+                    <p class="mt-2 text-teal-50" id="error-text-2">Please try again later.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- === Footer === -->
+    <footer class="py-12 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6 text-center text-sm text-teal-800">
+            <p>&copy; <span id="current-year"></span> AI Building Masterclass. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Wait for the DOM to be fully loaded before running scripts
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide Icons
+            // Check if lucide is available, just in case
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            } else {
+                console.warn('Lucide icons library not loaded.');
+            }
+            
+            // Set Current Year in Footer
+            const yearSpan = document.getElementById('current-year');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+
+            // --- Form Handling ---
+            const form1 = document.getElementById('waitlist-form-1');
+            const formContainer1 = document.getElementById('form-container-1');
+            const successMessage1 = document.getElementById('success-message-1');
+            const errorMessage1 = document.getElementById('error-message-1');
+            const errorText1 = document.getElementById('error-text-1');
+            const emailInput1 = document.getElementById('email-input-1');
+            
+            const form2 = document.getElementById('waitlist-form-2');
+            const formContainer2 = document.getElementById('form-container-2');
+            const successMessage2 = document.getElementById('success-message-2');
+            const errorMessage2 = document.getElementById('error-message-2');
+            const errorText2 = document.getElementById('error-text-2');
+            const emailInput2 = document.getElementById('email-input-2');
+
+            const handleSubmit = async (e, formContainer, successMessage, errorMessage, errorText, emailInput) => {
+                e.preventDefault();
+                
+                // Hide previous messages
+                if (successMessage) successMessage.classList.add('hidden');
+                if (errorMessage) errorMessage.classList.add('hidden');
+                
+                const email = emailInput.value.trim();
+                
+                if (!email) {
+                    if (errorMessage && errorText) {
+                        errorText.textContent = 'Please enter a valid email address.';
+                        errorMessage.classList.remove('hidden');
+                    }
+                    return;
+                }
+                
+                // Disable form during submission
+                const submitButton = e.target.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.innerHTML;
+                submitButton.disabled = true;
+                submitButton.innerHTML = 'Joining...';
+                
+                try {
+                    const response = await fetch('/ai-masterclass/api/subscribe', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email: email })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        // Show success message
+                        if (formContainer) formContainer.classList.add('hidden');
+                        if (successMessage) successMessage.classList.remove('hidden');
+                        // Clear input
+                        emailInput.value = '';
+                    } else {
+                        // Show error message
+                        if (errorMessage && errorText) {
+                            errorText.textContent = data.error || 'Failed to subscribe. Please try again.';
+                            errorMessage.classList.remove('hidden');
+                        }
+                    }
+                } catch (error) {
+                    // Show error message
+                    if (errorMessage && errorText) {
+                        errorText.textContent = 'Network error. Please check your connection and try again.';
+                        errorMessage.classList.remove('hidden');
+                    }
+                } finally {
+                    // Re-enable form
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonText;
+                }
+            };
+
+            if (form1 && formContainer1 && successMessage1) {
+                form1.addEventListener('submit', (e) => handleSubmit(e, formContainer1, successMessage1, errorMessage1, errorText1, emailInput1));
+            }
+            if (form2 && formContainer2 && successMessage2) {
+                form2.addEventListener('submit', (e) => handleSubmit(e, formContainer2, successMessage2, errorMessage2, errorText2, emailInput2));
+            }
+        });
+        
+    </script>
+</body>
+</html>
