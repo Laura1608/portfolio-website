@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Timeout was already handled in the abort callback
                 return;
             }
-            showMessage(`Something went wrong. Please email me directly at lauraottosolutions@gmail.com (${error.message})`, true);
+            showMessage(`Something went wrong. Please contact me directly at lauraottosolutions@gmail.com`, true);
         } finally {
             if (!submitButton.disabled) return; // Don't reset if already reset by timeout
             submitButton.disabled = false;
