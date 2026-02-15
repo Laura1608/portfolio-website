@@ -94,19 +94,15 @@ function initReviewsSlideshow() {
     
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
-            if (currentIndex < totalSlides - 1) {
-                currentIndex++;
-                updateSlideshow();
-            }
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlideshow();
         });
     }
     
     if (prevBtn) {
         prevBtn.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateSlideshow();
-            }
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlideshow();
         });
     }
 
