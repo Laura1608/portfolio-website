@@ -72,21 +72,27 @@
                     <p class="text-base font-semibold text-teal-600 mb-1">
                         Join the waitlist for a 15% early-bird discount
                     </p>
-                    <form id="waitlist-form-1" class="mt-6 flex flex-col sm:flex-row gap-3 justify-center max-w-lg mx-auto">
-                        <input
-                            id="email-input-1"
-                            type="email"
-                            required
-                            placeholder="Your Email Address"
-                            class="w-full sm:w-72 flex-auto px-4 py-3 border border-teal-300 rounded-lg shadow-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-                        />
-                        <button
-                            type="submit"
-                            class="btn-primary text-white font-semibold px-8 py-3 rounded-lg shadow-lg flex items-center justify-center gap-2 whitespace-nowrap"
-                        >
-                            Join the Waitlist
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </button>
+                    <form id="waitlist-form-1" class="mt-6 flex flex-col gap-3 max-w-lg mx-auto">
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <input
+                                id="email-input-1"
+                                type="email"
+                                required
+                                placeholder="Your Email Address"
+                                class="w-full sm:w-72 flex-auto px-4 py-3 border border-teal-300 rounded-lg shadow-sm focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                            />
+                            <button
+                                type="submit"
+                                class="btn-primary text-white font-semibold px-8 py-3 rounded-lg shadow-lg flex items-center justify-center gap-2 whitespace-nowrap"
+                            >
+                                Join the Waitlist
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                        <label class="flex items-start gap-2 text-sm text-teal-800 cursor-pointer">
+                            <input type="checkbox" id="consent-1" name="privacy_consent" required class="mt-1">
+                            <span>I consent to my email being stored to notify me about the masterclass. Data may be processed outside the EEA (Google). <a href="/legal/privacy.html" target="_blank" class="underline">Privacy Policy</a></span>
+                        </label>
                     </form>
                     <p class="mt-4 text-sm text-teal-800">
                         No spam. Just a notification when it's ready.
@@ -353,22 +359,27 @@
                 
                 <!-- Waitlist Form (Footer) -->
                 <div id="form-container-2" class="mt-12">
-                    <form id="waitlist-form-2" class="mt-6 flex flex-col sm:flex-row gap-3 justify-center max-w-lg mx-auto">
-                        <input
-                            id="email-input-2"
-                            type="email"
-                            required
-                            placeholder="Your Email Address"
-                            class="w-full sm:w-72 flex-auto px-4 py-3 border border-transparent text-teal-900 rounded-lg shadow-sm focus:ring-2 focus:ring-white focus:outline-none"
-                        />
-                        <button
-                            type="submit"
-                            class="bg-teal-50 text-teal-800 font-semibold px-6 py-3 rounded-lg shadow-lg flex items-center justify-center gap-2"
-
+                    <form id="waitlist-form-2" class="mt-6 flex flex-col gap-3 max-w-lg mx-auto">
+                        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                            <input
+                                id="email-input-2"
+                                type="email"
+                                required
+                                placeholder="Your Email Address"
+                                class="w-full sm:w-72 flex-auto px-4 py-3 border border-transparent text-teal-900 rounded-lg shadow-sm focus:ring-2 focus:ring-white focus:outline-none"
+                            />
+                            <button
+                                type="submit"
+                                class="bg-teal-50 text-teal-800 font-semibold px-6 py-3 rounded-lg shadow-lg flex items-center justify-center gap-2"
                             >
-                            Join the Waitlist
-                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </button>
+                                Join the Waitlist
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                        <label class="flex items-start gap-2 text-sm text-teal-50/90 cursor-pointer justify-center">
+                            <input type="checkbox" id="consent-2" name="privacy_consent" required class="mt-1">
+                            <span>I consent to my email being stored to notify me. Data may be processed outside the EEA. <a href="/legal/privacy.html" target="_blank" class="underline">Privacy Policy</a></span>
+                        </label>
                     </form>
                 </div>
                 
@@ -391,8 +402,10 @@
 
     <!-- === Footer === -->
     <footer class="py-12 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-6 text-center text-sm text-teal-800">
-            <p>&copy; <span id="current-year"></span> AI Building Masterclass. All rights reserved.</p>
+        <div class="max-w-7xl mx-auto px-6 text-center text-sm text-teal-800 space-y-2">
+            <p><strong>Laura Otto Solutions</strong> &nbsp;|&nbsp; Gijsbrecht van Aemstelstraat 26, 2026 VH Haarlem, NL &nbsp;|&nbsp; KvK 94716501</p>
+            <p><a href="/legal/privacy.html">Privacy</a> &nbsp;|&nbsp; <a href="/legal/terms.html">Terms</a> &nbsp;|&nbsp; <a href="/legal/vulnerability-disclosure.html">Responsible disclosure</a></p>
+            <p>&copy; <span id="current-year"></span> Laura Otto. All rights reserved.</p>
         </div>
     </footer>
 

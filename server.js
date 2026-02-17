@@ -213,6 +213,11 @@ app.get('/masterclass-ai', (req, res) => {
     res.sendFile(path.join(__dirname, 'masterclass-ai.html'));
 });
 
+// Legal pages (explicit routes ensure they are always served from project)
+app.get('/legal/privacy.html', (req, res) => res.sendFile(path.join(__dirname, 'legal', 'privacy.html')));
+app.get('/legal/terms.html', (req, res) => res.sendFile(path.join(__dirname, 'legal', 'terms.html')));
+app.get('/legal/vulnerability-disclosure.html', (req, res) => res.sendFile(path.join(__dirname, 'legal', 'vulnerability-disclosure.html')));
+
 // Handle 404
 app.use((req, res) => {
     res.status(404).sendFile(path.join(__dirname, 'index.html'));

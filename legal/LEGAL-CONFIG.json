@@ -1,0 +1,62 @@
+{
+  "_comment": "Central configuration for all legal documents. Portfolio website lauraotto.nl.",
+  "product": {
+    "name": "Laura Otto Portfolio",
+    "version": "1.0.0",
+    "description": "Portfolio website with contact form and AI Masterclass waitlist"
+  },
+  "company": {
+    "legal_name": "Laura Otto Solutions",
+    "address": "Gijsbrecht van Aemstelstraat 26, 2026 VH Haarlem, The Netherlands",
+    "registration_number": "94716501",
+    "vat_number": "NL005104012B61"
+  },
+  "contacts": {
+    "support_email": "lauraottosolutions@gmail.com"
+  },
+  "urls": {
+    "website": "https://lauraotto.nl",
+    "privacy_policy": "https://lauraotto.nl/legal/privacy.html",
+    "terms": "https://lauraotto.nl/legal/terms.html",
+    "support_portal": "mailto:lauraottosolutions@gmail.com",
+    "vulnerability_disclosure": "https://lauraotto.nl/legal/vulnerability-disclosure.html"
+  },
+  "retention_periods": {
+    "contact_form_messages": "2 years after last communication; no persistent server storage (email only)",
+    "waitlist_emails": "Until masterclass launch + 1 year, or until user requests deletion",
+    "website_logs": "90 days",
+    "support_tickets": "2 years after resolution",
+    "support_attachments": "90 days after issue closure",
+    "billing_records": "N/A (no payments)",
+    "license_logs": "N/A (no licensing)",
+    "analytics": "N/A (no analytics)"
+  },
+  "vendors": {
+    "email_provider": "Brevo",
+    "hosting_provider": "Railway",
+    "waitlist_storage": "Google Sheets",
+    "payment_provider": null,
+    "analytics_provider": null
+  },
+  "support": {
+    "business_hours": "Monday-Friday, 09:00-17:00 CET",
+    "response_times": {
+      "S1_critical": "4 business hours (best effort)",
+      "S2_high": "1 business day (best effort)",
+      "S3_normal": "3 business days (best effort)"
+    }
+  },
+  "payment": null,
+  "international_transfers": {
+    "description": "Brevo processes within EEA (France). Google Sheets may process data in the US; we rely on Google's Standard Contractual Clauses. Explicit consent obtained for waitlist signup.",
+    "current_transfers": [
+      "Brevo (EEA - France)",
+      "Google Sheets (US - SCCs)"
+    ]
+  },
+  "document_metadata": {
+    "effective_date": "2026-02-17",
+    "version": "1.0",
+    "last_reviewed": "2026-02-17"
+  }
+}
