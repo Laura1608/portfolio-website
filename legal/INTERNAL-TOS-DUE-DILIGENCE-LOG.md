@@ -10,7 +10,7 @@ Purpose: document that you have **checked** the relevant Terms of Service / Acce
 |--------|---------|-----|--------------|------|
 | Brevo | Transactional email (contact form) | https://www.brevo.com/legal/ | GDPR compliant; EEA (France); DPA available; 72h breach notification | Low |
 | Google Sheets API | Waitlist storage | https://cloud.google.com/terms/data-processing-addendum | CDPA; SCCs for US transfers | Low – consent + SCCs documented |
-| Railway | Hosting | https://railway.app/legal | Standard hosting ToS; EEA availability | Low |
+| Railway | Hosting | https://railway.app/legal | Standard hosting ToS; EEA – Amsterdam-West (Netherlands) | Low |
 
 ---
 

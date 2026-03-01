@@ -1,7 +1,7 @@
 # Internal: ROPA – Laura Otto Portfolio
 
 **Product:** Laura Otto Portfolio (lauraotto.nl)  
-**Last updated:** 2026-02-17  
+**Last updated:** 2026-02-17
 **Version:** 1.0
 
 ## Processing Activity 1: Contact Form
@@ -13,7 +13,7 @@
 | Contact | lauraottosolutions@gmail.com |
 | Purpose | Respond to inquiries from website visitors |
 | Categories of data subjects | Website visitors (prospective clients) |
-| Categories of personal data | Name, email, message content |
+| Categories of personal data | Name, email, message content, consent_timestamp |
 | Categories of recipients | Brevo (email delivery), Laura's inbox |
 | International transfers | Brevo: EEA (France). No transfer outside EEA for contact form. |
 | Retention | Email: 2 years after last communication. No server-side storage. |
@@ -53,7 +53,7 @@
 | Categories of data subjects | Website visitors |
 | Categories of personal data | IP address, User-Agent, request path, timestamps |
 | Categories of recipients | Railway (hosting) |
-| International transfers | EEA (Railway) |
+| International transfers | EEA – Railway Amsterdam-West (Netherlands) |
 | Retention | 90 days |
 | Security measures | TLS, log rotation |
 | Vendors | Railway |

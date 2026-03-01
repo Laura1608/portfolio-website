@@ -33,8 +33,8 @@ For each "processing activity", record:
 
 # DATA-FLOW MAP: Laura Otto Portfolio (lauraotto.nl)
 
-**Product:** Laura Otto Portfolio  
-**Last updated:** 2026-02-17  
+**Product:** Laura Otto Portfolio
+**Last updated:** 2026-02-17
 **Architecture:** Website with contact form and AI Masterclass waitlist
 
 ## Overview Diagram
@@ -64,7 +64,7 @@ For each "processing activity", record:
 
 | Activity | Data | Source | Systems | Recipients/vendors | Retention | Legal Basis |
 |---|---|---|---|---|---|---|
-| Contact form | Name, email, message | User | Express → Brevo → inbox | Brevo (EEA) | Email: 2y after last comm; no server storage | Consent |
+| Contact form | Name, email, message, consent_timestamp | User | Express → Brevo → inbox | Brevo (EEA) | Email: 2y after last comm; no server storage | Consent (GDPR Art. 7(1)) |
 | Waitlist signup | Email, date | User | Express → Google Sheets API | Google (US) | Until masterclass launch + 1y, or deletion request | Consent |
 | Website visit | IP, User-Agent, request path | Visitor browser | Web server | Railway | 90 days (logs) | Legitimate interest |
 
@@ -74,7 +74,7 @@ For each "processing activity", record:
 |---|---|---|---|---|
 | Brevo | Transactional email (contact form) | Name, email, message | France (EEA) | Brevo DPA/GDPR |
 | Google Sheets | Waitlist storage | Email, signup date | US | SCCs; explicit consent at signup |
-| Railway | Hosting | Server logs, request data | EEA | Vendor terms |
+| Railway | Hosting | Server logs, request data | Netherlands (Amsterdam-West, EEA) | Vendor terms |
 
 ## Security Controls
 
@@ -82,7 +82,7 @@ For each "processing activity", record:
 |---|---|
 | TLS | HTTPS for all traffic |
 | No persistent storage | Contact form content not stored on server; forwarded by email only |
-| Consent | Explicit checkbox for contact form and waitlist (Option A) |
+| Consent | Explicit checkbox for contact form and waitlist (Option A); consent_timestamp captured at form submission and included in notification email (GDPR Art. 7(1) evidence) |
 | Credentials | Brevo API key, Google creds in env vars only |
 
 ---

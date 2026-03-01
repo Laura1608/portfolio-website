@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = {
             name: form.querySelector('input[name="name"]').value,
             email: form.querySelector('input[name="email"]').value,
-            message: form.querySelector('textarea[name="message"]').value
+            message: form.querySelector('textarea[name="message"]').value,
+            consent_timestamp: new Date().toISOString()
         };
 
         if (!formData.name || !formData.email || !formData.message) {

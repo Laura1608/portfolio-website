@@ -174,20 +174,27 @@ app.post('/ai-masterclass/api/subscribe', async (req, res) => {
 
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
-    const { name, email, message } = req.body;
+    const { name, email, message, consent_timestamp } = req.body;
 
     // Input validation
     if (!name || !email || !message) {
         return res.status(400).json({ error: 'Please fill in all fields' });
     }
 
+    // Consent timestamp: fall back to server time if client didn't send one
+    const consentTs = consent_timestamp || new Date().toISOString();
+
+    // Server-side consent log (Railway retains logs 90 days)
+    console.log(`[CONSENT] name=${name} email=${email} consent_timestamp=${consentTs}`);
+
     const htmlContent = `<h3>New Contact Form Submission</h3>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <h4>Message:</h4>
-        <p>${message.replace(/\n/g, '<br>')}</p>`;
-    
-    const textContent = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+        <p>${message.replace(/\n/g, '<br>')}</p>
+        <hr>
+
+    const textContent = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\n---\nConsent recorded: ${consentTs} (GDPR Art. 7(1) — Privacy Policy accepted at form submission)`;
 
     try {
         await sendEmail(

@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(head -20 grep -ri \"ODR\\\\|online dispute\\\\|ec.europa.eu/consumers/odr\" /c/Users/laura/Documents/MEGAsync/Data/PythonProjects/Cursor/portfolio-website/legal/)"
+    ]
+  }
+}
