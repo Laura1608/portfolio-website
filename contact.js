@@ -1,21 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.contact-form');
+    if (!form) return;
+
     const submitButton = form.querySelector('button[type="submit"]');
     let currentMessage = null;
 
     function showMessage(message, isError = false) {
-        // Remove any existing message
-        if (currentMessage) {
-            currentMessage.remove();
-        }
-
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `form-message ${isError ? 'error' : 'success'}`;
-        messageDiv.textContent = message;
-        
-        // Insert message at the end of the form
-        form.appendChild(messageDiv);
-        currentMessage = messageDiv;
+        if (currentMessage) currentMessage.remove();
+        const div = document.createElement('div');
+        div.className = `form-message ${isError ? 'error' : 'success'}`;
+        div.textContent = message;
+        form.appendChild(div);
+        currentMessage = div;
     }
 
     // Handle form submission
@@ -23,9 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
 
         const formData = {
-            name: form.querySelector('input[name="name"]').value,
-            email: form.querySelector('input[name="email"]').value,
-            message: form.querySelector('textarea[name="message"]').value,
+            name: form.querySelector('input[name="name"]').value.trim(),
+            email: form.querySelector('input[name="email"]').value.trim(),
+            message: form.querySelector('textarea[name="message"]').value.trim(),
             consent_timestamp: new Date().toISOString()
         };
 
@@ -36,27 +32,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(formData.email)) {
-            showMessage('Please enter a valid email address', true);
+            showMessage('Please enter a valid email address.', true);
             return;
         }
 
         submitButton.disabled = true;
-        submitButton.textContent = 'Sending...';
+        submitButton.textContent = 'Sending…';
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => {
+            controller.abort();
+            showMessage('This is taking longer than expected. Please try again.', true);
+        }, 10000);
 
         try {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => {
-                controller.abort();
-                showMessage('The message is taking longer than expected to send. Please try again.', true);
-            }, 10000); // 10 seconds timeout
-
             const response = await fetch('/api/contact', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
-                signal: controller.signal
+                signal: controller.signal,
             });
             clearTimeout(timeoutId);
             const result = await response.json();
@@ -68,17 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error(result.error || 'Failed to send message');
             }
         } catch (error) {
-            console.error('Error details:', {
-                name: error.name,
-                message: error.message,
-                stack: error.stack
-            });
-            
-            if (error.name === 'AbortError') {
-                // Timeout was already handled in the abort callback
-                return;
-            }
-            showMessage(`Something went wrong. Please contact me directly at lauraottosolutions@gmail.com`, true);
+            clearTimeout(timeoutId);
+            if (error.name === 'AbortError') return;
+            showMessage('Something went wrong. Please contact me directly at lauraottosolutions@gmail.com', true);
         } finally {
             if (!submitButton.disabled) return; // Don't reset if already reset by timeout
             submitButton.disabled = false;

@@ -19,26 +19,36 @@ const apiInstance = new brevo.TransactionalEmailsApi();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Block public access to internal legal documents
+app.use('/legal', (req, res, next) => {
+    if (req.path.endsWith('.md') || req.path.endsWith('.json')) {
+        return res.status(404).sendFile(path.join(__dirname, 'index.html'));
+    }
+    next();
+});
+
 // Serve static files
 app.use(express.static(__dirname));
 
-// Email sending setup (Brevo)
+// Escape user input for safe HTML rendering in emails
+const escapeHtml = (str) =>
+    String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+
+// Send email via Brevo
 const sendEmail = async (to, subject, textContent, htmlContent) => {
-    const sendSmtpEmail = new brevo.SendSmtpEmail();
-    sendSmtpEmail.sender = { email: process.env.ADMIN_EMAIL, name: 'Laura Otto Portfolio' };
-    sendSmtpEmail.to = [{ email: to }];
-    sendSmtpEmail.subject = subject;
-    sendSmtpEmail.htmlContent = htmlContent;
-    sendSmtpEmail.textContent = textContent;
-    
-    try {
-        const data = await apiInstance.sendTransacEmail(sendSmtpEmail);
-        console.log('Email sent successfully. MessageId:', data.messageId);
-        return true;
-    } catch (error) {
-        console.error('Error sending email:', error);
-        throw error;
-    }
+    const email = new brevo.SendSmtpEmail();
+    email.sender = { email: process.env.ADMIN_EMAIL, name: 'Laura Otto Portfolio' };
+    email.to = [{ email: to }];
+    email.subject = subject;
+    email.htmlContent = htmlContent;
+    email.textContent = textContent;
+
+    const data = await apiInstance.sendTransacEmail(email);
+    console.log('Email sent. MessageId:', data.messageId);
 };
 
 // --- Google Sheets helpers for AI Masterclass waitlist ---
@@ -193,12 +203,13 @@ app.post('/api/contact', async (req, res) => {
         <h4>Message:</h4>
         <p>${message.replace(/\n/g, '<br>')}</p>
         <hr>
+    `;
 
     const textContent = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\n---\nConsent recorded: ${consentTs} (GDPR Art. 7(1) — Privacy Policy accepted at form submission)`;
 
     try {
         await sendEmail(
-            process.env.ADMIN_EMAIL, 
+            process.env.ADMIN_EMAIL,
             `Portfolio Contact: ${name}`,
             textContent,
             htmlContent
@@ -206,7 +217,7 @@ app.post('/api/contact', async (req, res) => {
         res.json({ success: true });
     } catch (error) {
         console.error('Failed to send email:', error);
-        res.status(500).json({ error: 'Failed to send email. Please try again.' });
+        res.status(500).json({ error: 'Failed to send your email. Please try again.' });
     }
 });
 
@@ -225,10 +236,11 @@ app.get('/legal/privacy.html', (req, res) => res.sendFile(path.join(__dirname, '
 app.get('/legal/terms.html', (req, res) => res.sendFile(path.join(__dirname, 'legal', 'terms.html')));
 app.get('/legal/vulnerability-disclosure.html', (req, res) => res.sendFile(path.join(__dirname, 'legal', 'vulnerability-disclosure.html')));
 
-// Handle 404
-app.use((req, res) => {
-    res.status(404).sendFile(path.join(__dirname, 'index.html'));
-});
+// Main route
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+
+// 404 fallback
+app.use((req, res) => res.status(404).sendFile(path.join(__dirname, 'index.html')));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
